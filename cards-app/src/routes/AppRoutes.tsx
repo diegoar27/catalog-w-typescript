@@ -1,38 +1,25 @@
-import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
-import NotFound from 'components/Error/NotFound';
-import CardList from 'components/List/CardList';
-import BottomBar from 'components/NavBar/BottomBar';
-import NavBar from 'components/NavBar/TopBar';
-import CardsProvider from 'context/CardsProvider';
-import React, { ReactElement } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-const useStyles = makeStyles({
-    root: {
-        paddingBottom: 5,
-        paddingTop: 5,
-    },
-});
+import CardsProvider from "context/CardsProvider";
+import Layout from "layout/Layout";
+import CardsPage from "pages/Cards";
+import Error from "pages/Error";
+import React, { ReactElement } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const AppRoutes: React.FC<unknown> = (): ReactElement => {
-    const classes = useStyles();
-    return (
-        <Router>
-            <NavBar />
-            <Container className={classes.root}>
-                <Switch>
-                    <Route exact path="/">
-                        <CardsProvider>
-                            <CardList />
-                        </CardsProvider>
-                    </Route>
-                    <Route component={NotFound} />
-                </Switch>
-            </Container>
-            <BottomBar />
-        </Router>
-    );
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Layout>
+            <CardsProvider>
+              <CardsPage />
+            </CardsProvider>
+          </Layout>
+        </Route>
+        <Route component={Error} />
+      </Switch>
+    </Router>
+  );
 };
 
 export default AppRoutes;

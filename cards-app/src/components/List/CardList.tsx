@@ -1,32 +1,42 @@
-import Grid from '@material-ui/core/Grid';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import Card from 'components/Item/Card';
-import CardsContext from 'context/CardsContext';
-import React, { useContext } from 'react';
+import Grid from "@material-ui/core/Grid";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
+import Card from "components/Item/Card";
+import CardsContext from "context/CardsContext";
+import ICard from "models/Card";
+import React, { useContext } from "react";
 
 const useStyles = makeStyles(() =>
-    createStyles({
-        root: {
-            flexGrow: 1,
-        },
-    }),
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+  }),
 );
 
-const CardList: React.FC = (): JSX.Element => {
-    const classes = useStyles();
-    const context = useContext(CardsContext);
+interface ICardList {
+  onEditItemClick: (item: ICard) => void;
+}
 
-    return (
-        <div data-testid="list" className={classes.root}>
-            <Grid container spacing={3}>
-                {context.map((value, i) => (
-                    <Grid key={i} item md={4} sm={12} xs={12}>
-                        <Card key={i} {...value} />
-                    </Grid>
-                ))}
-            </Grid>
-        </div>
-    );
+const CardList: React.FC<ICardList> = ({ onEditItemClick }: ICardList): JSX.Element => {
+  const classes = useStyles();
+  const context = useContext(CardsContext);
+
+  return (
+    <div data-testid="list" className={classes.root}>
+      <Grid container spacing={3}>
+        {context.list.map((value, i) => (
+          <Grid key={i} item md={4} sm={12} xs={12}>
+            <Card
+              key={i}
+              card={value}
+              onEditClick={(item) => onEditItemClick(item)}
+              onRemoveClick={(id) => context.delete(id)}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </div>
+  );
 };
 
 export default CardList;
