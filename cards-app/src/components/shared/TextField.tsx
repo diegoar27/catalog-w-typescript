@@ -2,7 +2,7 @@ import TextField from "@material-ui/core/TextField";
 import IErrorField from "models/ErrorField";
 import React from "react";
 
-interface ICustomTextField {
+export interface ICustomTextField {
   id: string;
   required?: boolean;
   name: string;

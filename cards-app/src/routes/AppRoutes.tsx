@@ -1,5 +1,4 @@
 import CardsProvider from "context/CardsProvider";
-import Layout from "layout/Layout";
 import CardsPage from "pages/Cards";
 import Error from "pages/Error";
 import React, { ReactElement } from "react";
@@ -10,13 +9,13 @@ const AppRoutes: React.FC<unknown> = (): ReactElement => {
     <Router>
       <Switch>
         <Route exact path="/">
-          <Layout>
-            <CardsProvider>
-              <CardsPage />
-            </CardsProvider>
-          </Layout>
+          <CardsProvider>
+            <CardsPage />
+          </CardsProvider>
         </Route>
-        <Route component={Error} />
+        <Route>
+          <Error />
+        </Route>
       </Switch>
     </Router>
   );

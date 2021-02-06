@@ -26,6 +26,7 @@ const CardModal: React.FC<ICardModal> = ({ open, card, onSubmitModal, onCloseMod
 
   useEffect(() => {
     setErrorFields([]);
+    setItem(card || newCard);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 

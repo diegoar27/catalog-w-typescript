@@ -25,7 +25,7 @@ const CardList: React.FC<ICardList> = ({ onEditItemClick }: ICardList): JSX.Elem
     <div data-testid="list" className={classes.root}>
       <Grid container spacing={3}>
         {context.list.map((value, i) => (
-          <Grid key={i} item md={4} sm={12} xs={12}>
+          <Grid key={i} item md={4} sm={6} xs={12}>
             <Card
               key={i}
               card={value}

@@ -3,7 +3,9 @@ import CardModal from "components/Modals/Card";
 import BottomBar from "components/NavBar/BottomBar";
 import TopBar from "components/NavBar/TopBar";
 import CardsContext from "context/CardsContext";
+import Layout from "layout/Layout";
 import ICard from "models/Card";
+import ISortOption from "models/SortOption";
 import React, { ReactElement, useContext, useState } from "react";
 
 const CardsPage: React.FC = (): ReactElement => {
@@ -35,17 +37,24 @@ const CardsPage: React.FC = (): ReactElement => {
     setShowModal(false);
   };
 
+  const handleOnSortChange = (option: ISortOption) => {
+    context.get(option);
+  };
+
   return (
     <>
-      <TopBar onAddClick={handleOnAddItemClick} />
-      <CardList onEditItemClick={handleOnEditItemClick} />
-      <CardModal
-        open={showModal}
-        card={itemModal}
-        onSubmitModal={handleOnModalSubmit}
-        onCloseModal={handleOnModalClose}
-      />
-      <BottomBar onAddClick={handleOnAddItemClick} />
+      <Layout
+        header={<TopBar onAddClick={handleOnAddItemClick} onSortChange={handleOnSortChange} />}
+        footer={<BottomBar onAddClick={handleOnAddItemClick} />}
+      >
+        <CardList onEditItemClick={handleOnEditItemClick} />
+        <CardModal
+          open={showModal}
+          card={itemModal}
+          onSubmitModal={handleOnModalSubmit}
+          onCloseModal={handleOnModalClose}
+        />
+      </Layout>
     </>
   );
 };

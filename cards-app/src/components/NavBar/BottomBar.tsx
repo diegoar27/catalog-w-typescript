@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
     appBar: {
       top: "auto",
       bottom: 0,
+      height: "25px",
     },
     fabButton: {
       ...fabButtonGeneral,
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface IBottomAppBar {
+export interface IBottomAppBar {
   onAddClick: () => void;
 }
 
@@ -42,9 +43,9 @@ const BottomAppBar: React.FC<IBottomAppBar> = ({ onAddClick }: IBottomAppBar): R
 
   return (
     <React.Fragment>
-      <AppBar position="static" color="primary" className={classes.appBar}>
+      <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
-          <Fab color="secondary" aria-label="add" className={classes.fabButton} onClick={onAddClick}>
+          <Fab color="secondary" aria-label="add-card" className={classes.fabButton} onClick={onAddClick}>
             <AddIcon />
           </Fab>
         </Toolbar>

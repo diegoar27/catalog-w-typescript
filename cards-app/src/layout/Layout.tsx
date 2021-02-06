@@ -1,24 +1,32 @@
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { ReactNode } from "react";
-
-interface ILayout {
-  children: ReactNode;
-}
+import React, { ReactElement, ReactNode } from "react";
 
 const useStyles = makeStyles({
   root: {
-    paddingBottom: 5,
-    paddingTop: 5,
+    paddingBottom: 0,
+    paddingTop: 0,
   },
 });
 
-const Layout: React.FC<ILayout> = ({ children }: ILayout) => {
+interface ILayout {
+  header?: ReactElement;
+  footer?: ReactElement;
+  children: ReactNode;
+}
+
+const Layout: React.FC<ILayout> = ({ header, footer, children }: ILayout) => {
   const classes = useStyles();
   return (
-    <Container className={classes.root}>
-      <React.Fragment>{children}</React.Fragment>
-    </Container>
+    <React.Fragment>
+      {header}
+      <main>
+        <Container className={classes.root}>
+          <React.Fragment>{children}</React.Fragment>
+        </Container>
+      </main>
+      {footer}
+    </React.Fragment>
   );
 };
 
